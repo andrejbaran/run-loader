@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/andrejbaran/webpack-run-loader.svg?style=svg)](https://circleci.com/gh/andrejbaran/webpack-run-loader)
+[![codecov](https://codecov.io/gh/andrejbaran/webpack-run-loader/branch/master/graph/badge.svg)](https://codecov.io/gh/andrejbaran/webpack-run-loader)
 # Info
 A webpack loader that executes function exported by previous loader and exports or returns the result.
 It is a mix of [apply-loader](https://github.com/mogelbrod/apply-loader) and [extract-loader](https://github.com/peerigon/extract-loader). See [Options](#options) for more details.
