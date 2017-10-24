@@ -1,6 +1,6 @@
 # Info
 A webpack loader that executes function exported by previous loader and exports or returns the result.
-It is a mix of [apply-loader](https://github.com/mogelbrod/apply-loader) and [extract-loader](https://github.com/peerigon/extract-loader). See [Options](#Options) for more details.
+It is a mix of [apply-loader](https://github.com/mogelbrod/apply-loader) and [extract-loader](https://github.com/peerigon/extract-loader). See [Options](#options) for more details.
 
 # Installation
 
