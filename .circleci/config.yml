@@ -1,0 +1,63 @@
+version: 2
+jobs:
+  - install_yarn:
+      docker:
+        - image: node:latest
+      steps:
+        - run:
+            name: Install yarn
+            command: curl -o- -L https://yarnpkg.com/install.sh | bash
+  - install_app:
+      docker:
+        - image: node:latest
+      steps:
+        - restore_cache:
+            keys:
+              - yarn-cache
+        - checkout: ~/project
+        - run:
+            name: Install app
+            command: yarn
+        - save_cache:
+            paths:
+              - ~/.cache/yarn
+            key: yarn-cache-{{ checksum "yarn.lock" }}
+        - persist_to_workspace:
+            root: ~
+            paths:
+              - project
+  
+  - test_6:
+      docker:
+        - image: node:6
+      steps:
+        - attach_workspace:
+            at: ~
+        - run:
+            name: Run tests
+            command: yarn test
+  - test_8:
+      docker:
+        - image: node:8
+      steps:
+        - attach_workspace:
+            at: ~
+        - run:
+            name: Run tests
+            command: yarn test
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - install_yarn
+      - install_app
+      - test_6:
+          requires:
+            - install_yarn
+            - install_app
+      - test_8:
+          requires:
+            - install_yarn
+            - install_app
+          
