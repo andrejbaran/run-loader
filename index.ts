@@ -90,13 +90,18 @@ runLoader.pitch = function(remainingRequest: string) {
         return;
     }
 
-    const result = "(req['default'] || req).apply(req)";
+    let args: string;
+    if (opts.args) {
+        args = JSON.stringify(opts.args);
+    }
+
+    const result = "(req['default'] || req).apply(req, ${args})";
     const exports = opts.stringify
         ? `JSON.stringify(${result});`
         : `${result};`;
 
-    return `var req = require(${JSON.stringify("!!" + remainingRequest)});
-module.exports = ${exports}`;
+    return `var req = require(${JSON.stringify(remainingRequest)});`
+        + `module.exports = ${exports}`;
 }
 
 export = runLoader;
