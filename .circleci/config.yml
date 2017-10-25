@@ -73,7 +73,9 @@ jobs:
           command: yarn test
       - run:
           name: Code coverage
-          command: npx codecov
+          command: |
+            npx codecov
+            cat coverage/lcov.info | npx codacy-coverage
 
 workflows:
   version: 2
