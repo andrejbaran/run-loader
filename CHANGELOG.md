@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-beta.4"></a>
+# [0.1.0-beta.4](https://github.com/andrejbaran/webpack-run-loader/compare/v0.1.0-beta.3...v0.1.0-beta.4) (2017-10-25)
+
+
+### Bug Fixes
+
+* **docs:** Improve docs ([945f43d](https://github.com/andrejbaran/webpack-run-loader/commit/945f43d))
+* Actually use `options.args` ([5d4c4dd](https://github.com/andrejbaran/webpack-run-loader/commit/5d4c4dd))
+* Fix CricleCI config ([8df39c5](https://github.com/andrejbaran/webpack-run-loader/commit/8df39c5))
+* Support exports.default ([fd4db3b](https://github.com/andrejbaran/webpack-run-loader/commit/fd4db3b))
+* **ts:** Explicit return type ([d528caa](https://github.com/andrejbaran/webpack-run-loader/commit/d528caa))
+
+
+### Features
+
+* Add loader options validation ([24e3768](https://github.com/andrejbaran/webpack-run-loader/commit/24e3768))
+* Setup CircleCI ([5779e0b](https://github.com/andrejbaran/webpack-run-loader/commit/5779e0b))
+
+
+
 <a name="0.1.0-beta.3"></a>
 # [0.1.0-beta.3](https://github.com/andrejbaran/webpack-run-loader/compare/v0.1.0-beta.2...v0.1.0-beta.3) (2017-10-24)
 
