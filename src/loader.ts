@@ -77,21 +77,21 @@ function optionsSchema() {
     return joi.object({
         context: joi.func(),
         args: joi.array().items(
-            joi.lazy(() => argOptionObjectSchema())
+            joi.lazy(() => argOptionSchema())
         ),
         export: joi.boolean().default(false),
         stringify: joi.boolean().default(false)
     });
 }
 
-function argOptionObjectSchema() {
+function argOptionSchema(): joi.AlternativesSchema {
     return joi.alternatives().try(
         joi.string().allow(""),
         joi.number(),
         joi.boolean(),
         joi.any().valid(null),
-        joi.array().items(joi.lazy(() => argOptionObjectSchema())),
-        joi.object().pattern(/./, joi.lazy(() => argOptionObjectSchema()))
+        joi.array().items(joi.lazy(() => argOptionSchema())),
+        joi.object().pattern(/./, joi.lazy(() => argOptionSchema()))
     );
 }
 
