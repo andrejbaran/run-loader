@@ -101,6 +101,24 @@ jobs:
       - run :
           name: Greenkeeper lockfile update
           command: npx --package greenkeeper-lockfile greenkeeper-lockfile-update
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+  greenkeeper_lockfile_upload:
+    docker:
+      - image: node:latest
+    steps:
+      - attach_workspace:
+          at: /usr/local/lib
+      - attach_workspace:
+          at: /usr/local/bin
+      - attach_workspace:
+          at: ~/
+      - run :
+          name: Greenkeeper lockfile upload
+          command: npx --package greenkeeper-lockfile greenkeeper-lockfile-upload
+
 workflows:
   version: 2
   test:
@@ -121,4 +139,8 @@ workflows:
       - coverage:
           requires:
             - test_8
-          
+            - test_6
+      - greenkeeper_lockfile_upload:
+          requires:
+            - test_8
+            - test_6
