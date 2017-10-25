@@ -2,10 +2,11 @@
 [![codecov](https://img.shields.io/codecov/c/github/andrejbaran/webpack-run-loader/master.svg)](https://codecov.io/gh/andrejbaran/webpack-run-loader)
 [![Codacy Badge](https://img.shields.io/codacy/grade/9a9ac6f1a2ad4bf68359ff63bf50dc09/master.svg)](https://www.codacy.com/app/andrej.baran/webpack-run-loader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andrejbaran/webpack-run-loader&amp;utm_campaign=Badge_Grade)
 [![npm](https://img.shields.io/npm/v/webpack-run-loader.svg)](https://www.npmjs.com/package/webpack-run-loader)
-![gh-issues-open](https://img.shields.io/github/issues/andrejbaran/webpack-run-loader.svg)
-![gh-issues-closed](https://img.shields.io/github/issues-closed/andrejbaran/webpack-run-loader.svg)
-![gh-pr-open](https://img.shields.io/github/issues-pr/andrejbaran/webpack-run-loader.svg)
-![gh-pr-closed](https://img.shields.io/github/issues-pr-closed/andrejbaran/webpack-run-loader.svg)
+
+[![gh-issues-open](https://img.shields.io/github/issues/andrejbaran/webpack-run-loader.svg)](https://github.com/andrejbaran/webpack-run-loader/issues)
+[![gh-issues-closed](https://img.shields.io/github/issues-closed/andrejbaran/webpack-run-loader.svg)](https://github.com/andrejbaran/webpack-run-loader/issues?q=is%3Aissue+is%3Aclosed)
+[![gh-pr-open](https://img.shields.io/github/issues-pr/andrejbaran/webpack-run-loader.svg)](https://github.com/andrejbaran/webpack-run-loader/pulls)
+[![gh-pr-closed](https://img.shields.io/github/issues-pr-closed/andrejbaran/webpack-run-loader.svg)](https://github.com/andrejbaran/webpack-run-loader/pulls?q=is%3Apr+is%3Aclosed)
 
 ## Info
 A webpack loader that executes function exported by previous loader and exports or returns the result.
@@ -160,6 +161,13 @@ module.exports = (req["default"] || req).apply(/* context */, /* array of args *
 
 Read more about [loaders](https://webpack.js.org/concepts/loaders/) and [pitching loaders](https://webpack.js.org/api/loaders/#pitching-loader).
 
-## stringify: boolean
+### stringify: boolean
 Specifies whether the exported function's result will be ran through `JSON.stringify` or not. 
 Default is `false`.
+
+## Contributing
+All PRs are welcome! Note that [conventional changlog/standard version](https://github.com/conventional-changelog/standard-version) is used for versioning and commit messages.
+
+## Roadmap
+* More thorough tests
+* Support for scripts using ES import/export declarations
