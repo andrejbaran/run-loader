@@ -1,5 +1,7 @@
 import { Script } from "vm";
+import * as joi from "joi";
 import { loader } from "webpack";
+import { OptionObject } from "loader-utils";
 
 import { parse } from "acorn";
 
@@ -67,9 +69,46 @@ export function runScript(
     return <Function>runScriptInVm({ script, sandbox });
 }
 
+export function validateOptions(opts: RunLoaderOptions) {
+    return joi.attempt(opts, optionsSchema());
+}
+
+function optionsSchema() {
+    return joi.object({
+        context: joi.func(),
+        args: joi.array().items(
+            joi.lazy(() => argOptionObjectSchema())
+        ),
+        export: joi.boolean().default(false),
+        stringify: joi.boolean().default(false)
+    });
+}
+
+function argOptionObjectSchema() {
+    return joi.alternatives().try(
+        joi.string().allow(""),
+        joi.number(),
+        joi.boolean(),
+        joi.any().valid(null),
+        joi.array().items(joi.lazy(() => argOptionObjectSchema())),
+        joi.object().pattern(/./, joi.lazy(() => argOptionObjectSchema()))
+    );
+}
+
 ///
 /// Interfaces
 ///
 
 export type Imports = Set<string>;
 export type Exports = Map<string, ModuleExports>;
+
+export interface RunLoaderOptions extends OptionObject {
+    context?: ContextFunction;
+    args?: any[];
+    export?: boolean;
+    stringify?: boolean;
+}
+
+export interface ContextFunction extends Function {
+    (this: loader.LoaderContext): any;
+}

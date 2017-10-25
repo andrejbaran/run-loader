@@ -5,18 +5,14 @@ import {
     loadModuleDependencies,
     prepareScript,
     prepareScriptSandBox,
-    runScript
+    runScript,
+    RunLoaderOptions,
+    validateOptions
 } from "./src/loader";
 
 import {
-    getOptions as getLoaderOptions,
-    OptionObject
+    getOptions as getLoaderOptions
 } from "loader-utils";
-
-const defaultLoaderOptions: RunLoaderOptions = {
-    export: true,
-    stringify: false
-}
 
 /**
  * `run-loader` is a webpack loader that mixes functionality of `apply-loader`
@@ -111,20 +107,5 @@ export = runLoader;
 
 function getOptions(context: loader.LoaderContext) {
     const options: RunLoaderOptions = getLoaderOptions(context) || {};
-    return Object.assign({}, defaultLoaderOptions, options);
-}
-
-///
-/// Interfaces
-///
-
-interface RunLoaderOptions extends OptionObject {
-    context?: ContextFunction;
-    args?: any[];
-    export?: boolean;
-    stringify?: boolean;
-}
-
-interface ContextFunction extends Function {
-    (this: loader.LoaderContext): any;
+    return validateOptions(options);
 }

@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "@types/acorn": "^4.0.2",
-    "@types/estraverse": "^0.0.6",
     "@types/estree": "^0.0.38",
     "@types/jest": "^21.1.4",
+    "@types/joi": "^10.4.4",
     "@types/loader-utils": "^1.1.0",
     "@types/node": "^8.0.44",
     "@types/webpack": "^3.0.13",
@@ -50,7 +50,7 @@
   "dependencies": {
     "acorn": "^5.1.2",
     "esquery": "^1.0.0",
-    "estraverse": "^4.2.0",
+    "joi": "^13.0.1",
     "loader-utils": "^1.1.0"
   }
 }
