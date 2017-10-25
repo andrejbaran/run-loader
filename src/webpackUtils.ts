@@ -29,7 +29,8 @@ export function loadModule(options: LoadModuleOptions) {
                     sandbox: depSandbox
                 });
 
-                resolve(exports);
+                // Handle cjs "default" export as well as regular cjs exports
+                resolve(exports["default"] || exports);
             }
         );
     });
