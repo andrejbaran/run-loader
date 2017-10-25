@@ -71,12 +71,36 @@ jobs:
       - run:
           name: Run tests
           command: yarn test
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - coverage
+  coverage:
+    docker:
+      - image: node:latest
+    steps:
+      - attach_workspace:
+          at: ~/
+      - attach_workspace:
+          at: ~/project
       - run:
           name: Code coverage
           command: |
             npx codecov
             cat coverage/lcov.info | npx codacy-coverage
-
+  greenkeeper_lockfile_update:
+    docker:
+      - image: node:latest
+    steps:
+      - attach_workspace:
+          at: /usr/local/lib
+      - attach_workspace:
+          at: /usr/local/bin
+      - attach_workspace:
+          at: ~/
+      - run :
+          name: Greenkeeper lockfile update
+          command: npx --package greenkeeper-lockfile greenkeeper-lockfile-update
 workflows:
   version: 2
   test:
@@ -85,10 +109,16 @@ workflows:
       - install_app:
           requires:
             - install_yarn
+      - greenkeeper_lockfile_update:
+          requires:
+            - install_app
       - test_6:
           requires:
-            - install_app
+            - greenkeeper_lockfile_update
       - test_8:
           requires:
-            - install_app
+            - greenkeeper_lockfile_update
+      - coverage:
+          requires:
+            - test_8
           
