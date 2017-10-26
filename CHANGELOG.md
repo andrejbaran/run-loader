@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-beta.6"></a>
+# [0.1.0-beta.6](https://github.com/andrejbaran/webpack-run-loader/compare/v0.1.0-beta.4...v0.1.0-beta.6) (2017-10-26)
+
+
+### Bug Fixes
+
+* Fix `options.args` when `options.export = true` ([57f01a9](https://github.com/andrejbaran/webpack-run-loader/commit/57f01a9))
+
+
+
 <a name="0.1.0-beta.5"></a>
 # [0.1.0-beta.5](https://github.com/andrejbaran/webpack-run-loader/compare/v0.1.0-beta.4...v0.1.0-beta.5) (2017-10-26)
 
