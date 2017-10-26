@@ -90,12 +90,12 @@ runLoader.pitch = function(remainingRequest: string) {
         return;
     }
 
-    let args: string;
+    let args: string | undefined = undefined;
     if (opts.args) {
         args = JSON.stringify(opts.args);
     }
 
-    const result = "(req['default'] || req).apply(req, ${args})";
+    const result = `(req['default'] || req).apply(req, ${args})`;
     const exports = opts.stringify
         ? `JSON.stringify(${result});`
         : `${result};`;
