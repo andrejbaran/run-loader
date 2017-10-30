@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-beta.7"></a>
+# [0.1.0-beta.7](https://github.com/andrejbaran/webpack-run-loader/compare/v0.1.0-beta.6...v0.1.0-beta.7) (2017-10-30)
+
+
+### Features
+
+* Add loader mode ([963fad8](https://github.com/andrejbaran/webpack-run-loader/commit/963fad8))
+
+
+
 <a name="0.1.0-beta.6"></a>
 # [0.1.0-beta.6](https://github.com/andrejbaran/webpack-run-loader/compare/v0.1.0-beta.4...v0.1.0-beta.6) (2017-10-26)
 
