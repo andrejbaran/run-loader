@@ -1,7 +1,7 @@
 {
   "name": "webpack-run-loader",
   "version": "0.1.0-beta.6",
-  "description": "Webpack loader that executes previously exported function and exports/returns its result",
+  "description": "A webpack loader that executes function exported by previous loader and exports or returns its result or the original function bound to context and arguments.",
   "main": "dist/index.js",
   "repository": "git+ssh://github.com:andrejbaran/webpack-run-loader.git",
   "author": "Andrej Baran",

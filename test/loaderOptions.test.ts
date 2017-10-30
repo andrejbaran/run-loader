@@ -4,8 +4,24 @@ describe("loader options validation", () => {
     test ("default options", () => {
         expect(validateOptions({}))
             .toEqual(
-                expect.objectContaining({ export: false, stringify: false})
+                expect.objectContaining({ mode: "run", export: false, stringify: false})
             );
+    });
+
+    test ("forced export", () => {
+        expect(validateOptions({mode: "bind"}))
+            .toEqual(
+                expect.objectContaining({ mode: "bind", export: true, stringify: false})
+            );
+    });
+
+    test("invalid forced export", () => {
+        expect(
+            validateOptions.bind(null, { mode: "bind", export: false})
+        ).toThrowError();
+        expect(
+            validateOptions.bind(null, { mode: "bind", stringify: true})
+        ).toThrowError();
     });
 
     test ("valid args", () => {
@@ -38,26 +54,5 @@ describe("loader options validation", () => {
                 args: [{obj: [1, "a", "", null, true, {a: "1"}]}]
             })
         );
-    });
-
-    test("invalid args", () => {
-        expect(
-            validateOptions.bind(null, { args: {}})
-        ).toThrowError();
-        expect(
-            validateOptions.bind(
-                null,
-                { args: [[[ {f: function() {}} ]]]}
-            )
-        ).toThrowError();
-        expect(
-            validateOptions.bind(
-                null,
-                { args: [{obj: {f: () => {}}}]}
-            )
-        ).toThrowError();
-        expect(
-            validateOptions.bind(null, { args: [undefined]})
-        ).toThrowError();
     });
 });

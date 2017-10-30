@@ -9,7 +9,8 @@
 [![gh-pr-closed](https://img.shields.io/github/issues-pr-closed/andrejbaran/webpack-run-loader.svg)](https://github.com/andrejbaran/webpack-run-loader/pulls?q=is%3Apr+is%3Aclosed)
 
 ## Info
-A webpack loader that executes function exported by previous loader and exports or returns the result.
+A webpack loader that executes function exported by previous loader and exports or returns its result
+or the original function bound to context and arguments.
 It is a mix of [apply-loader](https://github.com/mogelbrod/apply-loader) and [extract-loader](https://github.com/peerigon/extract-loader). See [Options](#options) for more details.
 
 ### Reasoning / Alternatives
@@ -56,53 +57,19 @@ You can specify loader options the regular way in your webpack config:
 }
 ```
 
-* [export: boolean](#export)
-* [stringify: boolean](#stringify)
-* [context: (loaderContext) => any](#context)
-* [args: array](#args)
+* [mode: ("run" | "bind")](#mode-run--bind)
+* [export: boolean](#export-boolean)
+* [stringify: boolean](#stringify-boolean)
+* [context: (loaderContext) => any](#context-loadercontext--any)
+* [args: array](#args-array)
 
-### context: (loaderContext) => any
-Function that returns context that will be exposed as `this` while running the exported function.
-This might be useful when you want to return the result of the function (`export false`) and you know the exported function is using `this` and you need to provide it.
-
-#### Signature
-`(loaderContext) => any` where `loaderContext` is webpack's loader [context](https://webpack.js.org/api/loaders/#the-loader-context)
-#### Example
-```js
-{
-    loader: "webpack-run-loader",
-    options: {
-        context: (ctx) => {
-            return {
-                // we need to provide createContext in order for the script to work
-                createContext(optionalArg) {
-                    ....
-                }
-            };
-        }
-    }
-}
-```
-
-### args: Array
-Array of arguments passed to exported function when executing it.
-#### Example
-```js
-{
-    loader: "webpack-run-loader",
-    options: {
-        context: (ctx) => {
-            return {
-                createContext(optionalArg) {
-                    // optionalArg will be ourOptionalArg
-                    ....
-                }
-            };
-        },
-        args: [ourOptionalArg]
-    }
-}
-```
+### mode: ("run" | "bind")
+Specifies the mode of the loader:
+* `run`: Actually runs the exported function and returns/exports its result
+* `bind`: Binds the exported function to optional [context](#context-loadercontext--any)
+  and [args](#args-array) and exports (forces [export](#export-boolean) to `true`) the bound function
+  
+Default is `run`.
 
 ### export: boolean
 Specifies whether the loader exports or returns the result of exported function.
@@ -164,6 +131,49 @@ Read more about [loaders](https://webpack.js.org/concepts/loaders/) and [pitchin
 ### stringify: boolean
 Specifies whether the exported function's result will be ran through `JSON.stringify` or not. 
 Default is `false`.
+
+### context: (loaderContext) => any
+Function that returns context that will be exposed as `this` while running the exported function.
+This might be useful when you want to return the result of the function (`export false`) and you know the exported function is using `this` and you need to provide it.
+
+#### Signature
+`(loaderContext) => any` where `loaderContext` is webpack's loader [context](https://webpack.js.org/api/loaders/#the-loader-context)
+#### Example
+```js
+{
+    loader: "webpack-run-loader",
+    options: {
+        context: (ctx) => {
+            return {
+                // we need to provide createContext in order for the script to work
+                createContext(optionalArg) {
+                    ....
+                }
+            };
+        }
+    }
+}
+```
+
+### args: Array
+Array of arguments passed to exported function when executing it.
+#### Example
+```js
+{
+    loader: "webpack-run-loader",
+    options: {
+        context: (ctx) => {
+            return {
+                createContext(optionalArg) {
+                    // optionalArg will be ourOptionalArg
+                    ....
+                }
+            };
+        },
+        args: [ourOptionalArg]
+    }
+}
+```
 
 ## Contributing
 All PRs are welcome! Note that [conventional changlog/standard version](https://github.com/conventional-changelog/standard-version) is used for versioning and commit messages.

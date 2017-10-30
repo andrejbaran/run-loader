@@ -73,20 +73,65 @@ export function validateOptions(opts: RunLoaderOptions) {
     return joi.attempt(opts, optionsSchema());
 }
 
+export function stringify(ctx: any): string {
+    return JSON.stringify(
+        ctx,
+        (key, val) => {
+            if (key.endsWith("_fnArgs")) {
+                return undefined;
+            }
+            if (typeof val == "object" && key !== "") {
+                return JSON.parse(stringify(val));
+            }
+            if (!(val instanceof Function)) {
+                return val;
+            }
+
+            const fnArgs = ctx[key + "_fnArgs"]
+                ? ctx[key + "_fnArgs"]
+                    .map((a: any) => JSON.stringify(a))
+                    .join(", ")
+                : undefined;
+
+            const fn = <Function>val;
+
+            return fnArgs
+                ? `__FN__:(${fn.toString()}).bind(null, ${fnArgs})`
+                : `__FN__:${fn.toString()}`;
+        }
+    );
+}
+
 function optionsSchema() {
     return joi.object({
+        mode: joi.string().valid("run", "bind").default("run"),
         context: joi.func(),
         args: joi.array().items(
             joi.lazy(() => argOptionSchema())
         ),
-        export: joi.boolean().default(false),
+        export: joi.boolean().default(false)
+            .when(
+                "mode",
+                {
+                    is: "bind",
+                    then: joi.boolean().valid(true).default(true)
+                }
+            ),
         stringify: joi.boolean().default(false)
+            .when(
+                "mode",
+                {
+                    is: "bind",
+                    then: joi.boolean().valid(false).default(false)
+                }
+            ),
     });
 }
 
 function argOptionSchema(): joi.AlternativesSchema {
     return joi.alternatives().try(
         joi.string().allow(""),
+        joi.func(),
         joi.number(),
         joi.boolean(),
         joi.any().valid(null),
