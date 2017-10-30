@@ -7,7 +7,8 @@ import {
     prepareScriptSandBox,
     runScript,
     RunLoaderOptions,
-    validateOptions
+    validateOptions,
+    stringify
 } from "./src/loader";
 
 import {
@@ -63,8 +64,7 @@ const runLoader: loader.Loader = function (content: string) {
             }
 
             let context;
-
-            if (opts.context instanceof Function) {
+            if (opts.context) {
                 context = opts.context.apply(this);
             }
 
@@ -90,17 +90,31 @@ runLoader.pitch = function(remainingRequest: string) {
         return;
     }
 
-    let args: string | undefined = undefined;
-    if (opts.args) {
-        args = JSON.stringify(opts.args);
+    let context = null;
+    if (opts.context) {
+        context = stringify(opts.context.apply(this));
     }
 
-    const result = `(req['default'] || req).apply(req, ${args})`;
+    let args = null;
+    if (opts.args) {
+        args = stringify(opts.args);
+    }
+
+    const mode = opts.mode === "run"
+        ? "apply"
+        : "bind";
+
+    const result = args
+        ? `(req['default'] || req).${mode}(__ctx, ...__args)`
+        : `(req['default'] || req).${mode}(__ctx)`;
     const exports = opts.stringify
         ? `JSON.stringify(${result});`
         : `${result};`;
 
-    return `var req = require(${JSON.stringify(remainingRequest)});`
+    return `var req = require(${JSON.stringify("!!" + remainingRequest)});\n\n`
+        + `var reviver = (key, val) => { if(typeof val === "string" && val.startsWith("__FN__:")) {return eval(val.substr("__FN__:".length));} return val;};\n`
+        + `var __ctx = JSON.parse(JSON.stringify(${context}), reviver);\n`
+        + (args ? `var __args = JSON.parse(JSON.stringify(${args}), reviver);\n\n` : "")
         + `module.exports = ${exports}`;
 }
 
