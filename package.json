@@ -34,7 +34,7 @@
     "@types/acorn": "^4.0.2",
     "@types/estree": "^0.0.38",
     "@types/jest": "^21.1.4",
-    "@types/joi": "^10.4.4",
+    "@types/joi": "^13.4.4",
     "@types/loader-utils": "^1.1.0",
     "@types/node": "^8.0.44",
     "@types/webpack": "^3.0.13",
