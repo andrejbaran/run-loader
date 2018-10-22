@@ -1762,9 +1762,9 @@ jest@^21.2.1:
   dependencies:
     jest-cli "^21.2.1"
 
-joi@^13.0.1:
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-13.0.1.tgz#97df285450e3ff5bc4db9eccf40a1cd5cf3ec189"
+joi@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-14.0.1.tgz#5bc53e8fff6e6da19d6cd8c76e2afe5c0815a2d3"
   dependencies:
     hoek "5.x.x"
     isemail "3.x.x"
