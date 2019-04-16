@@ -16,9 +16,10 @@
   version "21.1.4"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.4.tgz#83c5c474dd6dee5bef9d014ff36787edfd4ab5a7"
 
-"@types/joi@^10.4.4":
-  version "10.4.4"
-  resolved "https://registry.yarnpkg.com/@types/joi/-/joi-10.4.4.tgz#f437d223269ea46ce3313e32bc3d34d01ec74421"
+"@types/joi@^14.3.3":
+  version "14.3.3"
+  resolved "https://registry.yarnpkg.com/@types/joi/-/joi-14.3.3.tgz#f251aa8150fc0b6a7ce9feab21802a28473de335"
+  integrity sha512-6gAT/UkIzYb7zZulAbcof3lFxpiD5EI6xBeTvkL1wYN12pnFQ+y/+xl9BvnVgxkmaIDN89xWhGZLD9CvuOtZ9g==
 
 "@types/loader-utils@^1.1.0":
   version "1.1.0"
