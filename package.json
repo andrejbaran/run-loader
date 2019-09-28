@@ -37,7 +37,7 @@
     "@types/joi": "^10.4.4",
     "@types/loader-utils": "^1.1.0",
     "@types/node": "^8.0.44",
-    "@types/webpack": "^3.0.13",
+    "@types/webpack": "^4.39.2",
     "jest": "^21.2.1",
     "shx": "^0.2.2",
     "standard-version": "^4.2.0",
