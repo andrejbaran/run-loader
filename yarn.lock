@@ -20,9 +20,10 @@
   version "10.4.4"
   resolved "https://registry.yarnpkg.com/@types/joi/-/joi-10.4.4.tgz#f437d223269ea46ce3313e32bc3d34d01ec74421"
 
-"@types/loader-utils@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@types/loader-utils/-/loader-utils-1.1.0.tgz#6e71758ea4f529afca36fdebffd5b48c579e90da"
+"@types/loader-utils@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/loader-utils/-/loader-utils-2.0.0.tgz#4c7aa141f1159db082e50bd4d2533784afd30aed"
+  integrity sha512-PgtyFIgMv47sTWD5W5qBAJf+hczK10lts3ZGrwKroX5ex6HRMaMABMjfShmsg7foiGW+l6ZuU0MTIVr7wRs8YA==
   dependencies:
     "@types/node" "*"
     "@types/webpack" "*"
